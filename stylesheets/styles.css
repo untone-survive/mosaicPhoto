@@ -855,8 +855,7 @@ section #title .credits.right {
   height: 500px;
   padding: 40px;
   z-index: 10;
-  margin: 60px auto 40px;
-  position: relative;
+  margin: 0 auto;
   background-color: #dedede;
 }
 
