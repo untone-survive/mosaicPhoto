@@ -1,73 +1,284 @@
 <!doctype html>
 <html>
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="chrome=1">
-    <title>MosaicPhoto by h8every1</title>
-    <link rel="stylesheet" href="stylesheets/styles.css">
-    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
-    <script src="javascripts/respond.js"></script>
-    <!--[if lt IE 9]>
-      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
-    <!--[if lt IE 8]>
-    <link rel="stylesheet" href="stylesheets/ie.css">
-    <![endif]-->
-    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <title>MosaicPhoto by h8every1</title>
+  <link rel="stylesheet" href="https://raw.github.com/h8every1/mosaicPhoto/master/css/mosaicPhoto.css">
+  <link rel="stylesheet" href="stylesheets/styles.css">
+  <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+  <script src="https://raw.github.com/h8every1/mosaicPhoto/master/js/jquery.mosaicPhoto.js"></script>
+  <script src="javascripts/respond.js"></script>
+  <!--[if lt IE 9]>
+  <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+  <!--[if lt IE 8]>
+  <link rel="stylesheet" href="stylesheets/ie.css">
+  <![endif]-->
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
 
-  </head>
-  <body>
-      <div id="header">
-        <nav>
-          <li class="fork"><a href="https://github.com/h8every1/mosaicPhoto">View On GitHub</a></li>
-          <li class="downloads"><a href="https://github.com/h8every1/mosaicPhoto/zipball/master">ZIP</a></li>
-          <li class="downloads"><a href="https://github.com/h8every1/mosaicPhoto/tarball/master">TAR</a></li>
-          <li class="title">DOWNLOADS</li>
-        </nav>
-      </div><!-- end header -->
+</head>
+<body>
+<div id="header">
+  <nav>
+    <li class="fork"><a href="https://github.com/h8every1/mosaicPhoto">View On GitHub</a></li>
+    <li class="downloads"><a href="https://github.com/h8every1/mosaicPhoto/zipball/master">ZIP</a></li>
+    <li class="downloads"><a href="https://github.com/h8every1/mosaicPhoto/tarball/master">TAR</a></li>
+    <li class="title">DOWNLOADS</li>
+  </nav>
+</div>
+<!-- end header -->
 
-    <div class="wrapper">
+<div class="wrapper">
 
-      <section>
-        <div id="title">
-          <h1>MosaicPhoto</h1>
-          <p>jQuery plugin for creating random mosaics</p>
-          <hr>
-          <span class="credits left">Project maintained by <a href="https://github.com/h8every1">h8every1</a></span>
-          <span class="credits right">Hosted on GitHub Pages &mdash; Theme by <a href="http://twitter.com/#!/michigangraham">mattgraham</a></span>
-        </div>
+  <section>
+    <div id="title">
+      <h1>MosaicPhoto</h1>
 
-        <h3>Welcome to GitHub Pages.</h3>
-
-<p>This automatic page generator is the easiest way to create beautiful pages for all of your projects. Author your page content here using GitHub Flavored Markdown, select a template crafted by a designer, and publish. After your page is generated, you can check out the new branch:</p>
-
-<pre><code>$ cd your_repo_root/repo_name
-$ git fetch origin
-$ git checkout gh-pages
-</code></pre>
-
-<p>If you're using the GitHub for Mac, simply sync your repository and you'll see the new branch.</p>
-
-<h3>Designer Templates</h3>
-
-<p>We've crafted some handsome templates for you to use. Go ahead and continue to layouts to browse through them. You can easily go back to edit your page before publishing. After publishing your page, you can revisit the page generator and switch to another theme. Your Page content will be preserved if it remained markdown format.</p>
-
-<h3>Rather Drive Stick?</h3>
-
-<p>If you prefer to not use the automatic generator, push a branch named <code>gh-pages</code> to your repository to create a page manually. In addition to supporting regular HTML content, GitHub Pages support Jekyll, a simple, blog aware static site generator written by our own Tom Preston-Werner. Jekyll makes it easy to create site-wide headers and footers without having to copy them across every page. It also offers intelligent blog support and other advanced templating features.</p>
-
-<h3>Authors and Contributors</h3>
-
-<p>You can <a href="https://github.com/blog/821" class="user-mention">@mention</a> a GitHub username to generate a link to their profile. The resulting <code>&lt;a&gt;</code> element will link to the contributor's GitHub Profile. For example: In 2007, Chris Wanstrath (<a href="https://github.com/defunkt" class="user-mention">@defunkt</a>), PJ Hyett (<a href="https://github.com/pjhyett" class="user-mention">@pjhyett</a>), and Tom Preston-Werner (<a href="https://github.com/mojombo" class="user-mention">@mojombo</a>) founded GitHub.</p>
-
-<h3>Support or Contact</h3>
-
-<p>Having trouble with Pages? Check out the documentation at <a href="http://help.github.com/pages">http://help.github.com/pages</a> or contact <a href="mailto:support@github.com">support@github.com</a> and we’ll help you sort it out.</p>
-      </section>
-
+      <p>jQuery plugin for creating random mosaics</p>
+      <hr>
+      <span class="credits left">Project maintained by <a href="https://github.com/h8every1">h8every1</a></span>
+      <span class="credits right">Hosted on GitHub Pages &mdash; Theme by <a href="http://twitter.com/#!/michigangraham">mattgraham</a></span>
     </div>
-    <!--[if !IE]><script>fixScale(document);</script><!--<![endif]-->
-    
-  </body>
+
+    <h3>Usage example</h3>
+    <div id="previewContainer" class="mosaicContainer"></div>
+    <div id="menu1" class="menu">
+      <a href="#" rel="weddings">Weddings</a>&nbsp; <a href="#" rel="portrait">Portrait</a>
+
+      <p>
+        <small>Links above are passed as 'listeners' options. Click to reload the mosaic. Resizing the window also reloads the mosaic.</small>
+      </p>
+      <p><button id="secretCat">Show secret image category</button></p>
+      <p><small>See source code, to see how the buttons above works</small></p>
+    </div>
+    <h3>Installing the plugin:</h3>
+    <ol>
+      <li>Include jQuery, mosaicPhoto script and styles
+        <pre>
+          <code>
+&lt;script src="//ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"&gt;&lt;/script&gt;
+&lt;script src="js/jquery.mosaicPhoto.js"&gt;&lt;/script&gt;
+&lt;link rel="stylesheet" href="css/mosaicPhoto.css"&gt;
+          </code>
+        </pre>
+      </li>
+      <li>create the object with arrays of images like this:
+<pre>
+  <code>
+var images = {
+	'cat1' : [
+		["/img/cat1/1.jpg", "/img/cat1/big/1.jpg"],
+		 "/img/cat1/2.jpg",
+		 "/img/cat1/3.jpg",
+		["/img/cat1/4.jpg", "/img/cat1/big/4.jpg"],
+		 "/img/cat1/5.jpg",
+		 "/img/cat1/6.jpg",
+		 "/img/cat1/7.jpg",
+		["/img/cat1/8.jpg", "/img/cat1/big/8.jpg"],
+		 "/img/cat1/9.jpg",
+		 "/img/cat1/10.jpg"
+	],
+	'cat2' : [
+		["/img/cat2/1.jpg", "http://site.com/news"],
+		["/img/cat2/2.jpg", "http://site.com/about"],
+		["/img/cat2/3.jpg", "http://site.com/contacts"],
+		["/img/cat2/4.jpg", "http://site.com/feedback"],
+		["/img/cat2/5.jpg", "http://site.com/catalog"]
+	]
+	};</code>
+</pre>
+        You can have several categories of images and each image can have a link to the full image or to some other URL.
+      </li>
+      <li>Create the container element
+        <pre><code>&lt;div id="previewContainer" class="mosaicContainer"&gt;&lt;/div&gt;</code></pre>
+      </li>
+      <li>Finally launch the mosaicPhoto script
+<pre>
+  <code>
+	jQuery(document).ready(function($){
+
+
+		$("#previewContainer").mosaicPhoto({
+			  images: images
+			, listeners: "#menu1"
+			, listenersEvents: 'click'
+		});
+
+	});</code>
+</pre>
+      </li>
+    </ol>
+
+    <h3>Static container</h3>
+
+    <div id="previewStaticContainer" class="mosaicContainer"></div>
+    <div id="menu2" class="menu">
+      <p>
+        <small>Mosaic changes automatically</small><br>
+      </p>
+      <p><button id="toggleAnim">Stop animation</button></p>
+    </div>
+
+
+  </section>
+
+</div>
+<!--[if !IE]>
+<script>fixScale(document);</script><!--<![endif]-->
+
+<script>
+  images = {
+    weddings: [
+      ["http://h8every1.ru/mp/img/weddings/1.jpg", "http://h8every1.ru/mp/img/weddings/1.jpg"],
+      "http://h8every1.ru/mp/img/weddings/2.jpg",
+      "http://h8every1.ru/mp/img/weddings/3.jpg",
+      ["http://h8every1.ru/mp/img/weddings/4.jpg", "http://h8every1.ru/mp/img/weddings/4.jpg"],
+      "http://h8every1.ru/mp/img/weddings/5.jpg",
+      "http://h8every1.ru/mp/img/weddings/6.jpg",
+      "http://h8every1.ru/mp/img/weddings/7.jpg",
+      ["http://h8every1.ru/mp/img/weddings/8.jpg", "http://h8every1.ru/mp/img/weddings/8.jpg"],
+      "http://h8every1.ru/mp/img/weddings/9.jpg",
+      "http://h8every1.ru/mp/img/weddings/10.jpg",
+      "http://h8every1.ru/mp/img/weddings/11.jpg",
+      "http://h8every1.ru/mp/img/weddings/12.jpg",
+      "http://h8every1.ru/mp/img/weddings/13.jpg",
+      ["http://h8every1.ru/mp/img/weddings/14.jpg", "http://h8every1.ru/mp/img/weddings/14.jpg"],
+      "http://h8every1.ru/mp/img/weddings/15.jpg",
+      "http://h8every1.ru/mp/img/weddings/16.jpg",
+      "http://h8every1.ru/mp/img/weddings/17.jpg",
+      "http://h8every1.ru/mp/img/weddings/18.jpg",
+      ["http://h8every1.ru/mp/img/weddings/19.jpg", "http://h8every1.ru/mp/img/weddings/19.jpg"],
+      "http://h8every1.ru/mp/img/weddings/20.jpg",
+      "http://h8every1.ru/mp/img/weddings/21.jpg",
+      "http://h8every1.ru/mp/img/weddings/22.jpg",
+      "http://h8every1.ru/mp/img/weddings/23.jpg",
+      "http://h8every1.ru/mp/img/weddings/24.jpg",
+      "http://h8every1.ru/mp/img/weddings/25.jpg",
+      "http://h8every1.ru/mp/img/weddings/26.jpg",
+      "http://h8every1.ru/mp/img/weddings/27.jpg",
+      "http://h8every1.ru/mp/img/weddings/28.jpg",
+      "http://h8every1.ru/mp/img/weddings/29.jpg",
+      "http://h8every1.ru/mp/img/weddings/30.jpg"
+    ],
+    'portrait': [
+      "http://h8every1.ru/mp/img/portrait/1.jpg",
+      "http://h8every1.ru/mp/img/portrait/2.jpg",
+      "http://h8every1.ru/mp/img/portrait/3.jpg",
+      "http://h8every1.ru/mp/img/portrait/4.jpg",
+      "http://h8every1.ru/mp/img/portrait/5.jpg",
+      "http://h8every1.ru/mp/img/portrait/6.jpg",
+      "http://h8every1.ru/mp/img/portrait/7.jpg",
+      "http://h8every1.ru/mp/img/portrait/8.jpg",
+      "http://h8every1.ru/mp/img/portrait/9.jpg",
+      "http://h8every1.ru/mp/img/portrait/10.jpg",
+      "http://h8every1.ru/mp/img/portrait/11.jpg",
+      "http://h8every1.ru/mp/img/portrait/12.jpg",
+      "http://h8every1.ru/mp/img/portrait/13.jpg",
+      "http://h8every1.ru/mp/img/portrait/14.jpg",
+      "http://h8every1.ru/mp/img/portrait/15.jpg",
+      "http://h8every1.ru/mp/img/portrait/16.jpg",
+      "http://h8every1.ru/mp/img/portrait/17.jpg",
+      "http://h8every1.ru/mp/img/portrait/18.jpg",
+      "http://h8every1.ru/mp/img/portrait/19.jpg",
+      "http://h8every1.ru/mp/img/portrait/20.jpg",
+      "http://h8every1.ru/mp/img/portrait/21.jpg",
+      "http://h8every1.ru/mp/img/portrait/22.jpg",
+      "http://h8every1.ru/mp/img/portrait/23.jpg",
+      "http://h8every1.ru/mp/img/portrait/24.jpg",
+      "http://h8every1.ru/mp/img/portrait/25.jpg",
+      "http://h8every1.ru/mp/img/portrait/26.jpg",
+      "http://h8every1.ru/mp/img/portrait/27.jpg"
+    ],
+    'secretcat':[
+      "http://h8every1.ru/mp/img/weddings/31.jpg",
+      "http://h8every1.ru/mp/img/weddings/32.jpg",
+      ["http://h8every1.ru/mp/img/weddings/33.jpg", "http://h8every1.ru/mp/img/weddings/33.jpg"],
+      "http://h8every1.ru/mp/img/weddings/34.jpg",
+      "http://h8every1.ru/mp/img/weddings/35.jpg",
+      "http://h8every1.ru/mp/img/weddings/36.jpg",
+      "http://h8every1.ru/mp/img/weddings/37.jpg",
+      "http://h8every1.ru/mp/img/weddings/38.jpg",
+      "http://h8every1.ru/mp/img/weddings/39.jpg",
+      "http://h8every1.ru/mp/img/weddings/40.jpg",
+      "http://h8every1.ru/mp/img/weddings/41.jpg",
+      "http://h8every1.ru/mp/img/weddings/42.jpg",
+      "http://h8every1.ru/mp/img/weddings/40.jpg",
+      "http://h8every1.ru/mp/img/weddings/43.jpg",
+      ["http://h8every1.ru/mp/img/weddings/44.jpg", "http://h8every1.ru/mp/img/weddings/44.jpg"],
+      "http://h8every1.ru/mp/img/weddings/45.jpg",
+      "http://h8every1.ru/mp/img/weddings/46.jpg",
+      "http://h8every1.ru/mp/img/weddings/47.jpg",
+      "http://h8every1.ru/mp/img/weddings/48.jpg",
+      "http://h8every1.ru/mp/img/weddings/49.jpg",
+      ["http://h8every1.ru/mp/img/weddings/50.jpg", "http://h8every1.ru/mp/img/weddings/50.jpg"]
+    ]
+  };
+  images2 = {
+    studio: [
+      "http://h8every1.ru/mp/img/studio/1.jpg",
+      "http://h8every1.ru/mp/img/studio/2.jpg",
+      "http://h8every1.ru/mp/img/studio/3.jpg",
+      "http://h8every1.ru/mp/img/studio/4.jpg",
+      "http://h8every1.ru/mp/img/studio/5.jpg",
+      "http://h8every1.ru/mp/img/studio/6.jpg",
+      "http://h8every1.ru/mp/img/studio/7.jpg",
+      "http://h8every1.ru/mp/img/studio/8.jpg",
+      "http://h8every1.ru/mp/img/studio/9.jpg",
+      "http://h8every1.ru/mp/img/studio/10.jpg",
+      "http://h8every1.ru/mp/img/studio/11.jpg",
+      "http://h8every1.ru/mp/img/studio/12.jpg",
+      "http://h8every1.ru/mp/img/studio/13.jpg",
+      "http://h8every1.ru/mp/img/studio/14.jpg",
+      "http://h8every1.ru/mp/img/studio/15.jpg",
+      "http://h8every1.ru/mp/img/studio/16.jpg",
+      "http://h8every1.ru/mp/img/studio/17.jpg",
+      "http://h8every1.ru/mp/img/studio/18.jpg",
+      "http://h8every1.ru/mp/img/studio/19.jpg",
+      "http://h8every1.ru/mp/img/studio/20.jpg",
+      "http://h8every1.ru/mp/img/studio/21.jpg",
+      "http://h8every1.ru/mp/img/studio/22.jpg",
+      "http://h8every1.ru/mp/img/studio/23.jpg",
+      "http://h8every1.ru/mp/img/studio/24.jpg",
+      "http://h8every1.ru/mp/img/studio/25.jpg"
+    ]
+  };
+</script>
+<script>
+  jQuery(document).ready(function ($) {
+
+    var $cont1 = $("#previewContainer"),
+        $cont2 =$("#previewStaticContainer");
+    $cont1.mosaicPhoto({
+      images: images, listeners: "#menu1 a", ratio: 30
+    });
+
+    $cont2.mosaicPhoto({
+      images: images2, dynamic: false, cols: 19, rows: 5, maxImages: 20, auto: true, ratio: 5, fadeTime: 200
+    });
+
+    $cont2.mosaicPhoto({
+      ratio: 25, fadeTime: 450, timer: 1000
+    }).refresh();
+
+    //        console.log($("#previewStaticContainer").mosaicPhoto().getOptions());
+    $('#toggleAnim').click(function(e){
+      var curState = $cont2.mosaicPhoto().getOptions('auto'),
+          newState = !curState;
+      $(this).html(newState ? 'Stop animation' : 'Start animation');
+      $cont2.mosaicPhoto().setOptions({'auto':newState});
+      return e.preventDefault();
+    });
+
+    $('#secretCat').click(function(e){
+      var newState = $cont1.mosaicPhoto().selectCategory('secretcat').refresh();
+      return e.preventDefault();
+    });
+
+
+  });
+</script>
+
+</body>
 </html>
