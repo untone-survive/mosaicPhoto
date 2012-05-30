@@ -848,3 +848,54 @@ section #title .credits.right {
     display: none;
   }
 }
+
+
+.mosaicContainer {
+  width: 80%;
+  height: 500px;
+  padding: 40px;
+  z-index: 10;
+  margin: 60px auto 40px;
+  position: relative;
+  background-color: #dedede;
+}
+
+.mosaicItem {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  padding: 0;
+  margin: 2px 2px 0 0;
+  display: none;
+  width: 60px;
+  height: 60px;
+  background-position: center;
+
+  -webkit-box-shadow: 3px 3px 20px 0px #333333;
+  -moz-box-shadow: 3px 3px 20px 0px #333333;
+  box-shadow: 3px 3px 20px 0px #333333;
+}
+
+.mosaicItem  a {
+  display: block;
+  height: 100%;
+  text-decoration: none;
+}
+
+.mosaicContainer {
+  background: url('../images/bg.jpg');
+}
+
+#previewStaticContainer {
+  margin-left: 0;
+  margin-right: 0;
+  height: 310px;
+  width: 620px;
+}
+
+#previewStaticContainer .mosaicItem {
+  width: 30px;
+  -webkit-box-shadow: 3px 3px 10px 0px #333333;
+  -moz-box-shadow: 3px 3px 10px 0px #333333;
+  box-shadow: 3px 3px 10px 0px #333333;
+}
