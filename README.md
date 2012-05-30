@@ -1,4 +1,4 @@
 mosaicPhoto
 ===========
 
-jQuery plugin for creatin random mosaics
+jQuery plugin for creating random mosaics.
