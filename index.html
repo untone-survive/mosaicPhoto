@@ -30,7 +30,6 @@
 <!-- end header -->
 
 <div class="wrapper">
-
   <section>
     <div id="title">
       <h1>MosaicPhoto</h1>
@@ -40,37 +39,38 @@
       <span class="credits left">Project maintained by <a href="https://github.com/h8every1">h8every1</a></span>
       <span class="credits right">Hosted on GitHub Pages &mdash; Theme by <a href="http://twitter.com/#!/michigangraham">mattgraham</a></span>
     </div>
-
-    <h3>Usage example</h3>
-    </section>
+  </section>
+    <h3>Usage example (resize the browser window)</h3>
   </div>
     <div id="previewContainer" class="mosaicContainer"></div>
 <div class="wrapper">
-    <section>
     <div id="menu1" class="menu">
-      <a href="#" rel="weddings">Weddings</a>&nbsp; <a href="#" rel="portrait">Portrait</a>
+      <p><a href="#" rel="weddings">Weddings</a>&nbsp; <a href="#" rel="portrait">Portrait</a> <button id="secretCat">Show secret image category</button></p>
 
-      <p>
-        <small>Links above are passed as 'listeners' options. Click to reload the mosaic. Resizing the window also reloads the mosaic.</small>
-      </p>
-      <p><button id="secretCat">Show secret image category</button></p>
-      <p><small>See source code, to see how the buttons above works</small></p>
+<!--      <pre><code>
+        var $cont1 = $("#previewContainer");
+          $cont1.mosaicPhoto({
+          images: images,
+          listeners: "#menu1 a",
+          ratio: 30
+        });
+
+        $('#secretCat').click(function(e){
+          var newState = $cont1.mosaicPhoto().selectCategory('secretcat').refresh();
+          return e.preventDefault();
+        });
+
+      </code></pre> -->
     </div>
-    <h3>Installing the plugin:</h3>
+    <h3>Installing the plugin</h3>
     <ol>
-      <li>Include jQuery, mosaicPhoto script and styles
-        <pre>
-          <code>
-&lt;script src="//ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"&gt;&lt;/script&gt;
+      <li><p>Include jQuery, mosaicPhoto script and styles:</p>
+        <pre><code>&lt;script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"&gt;&lt;/script&gt;
 &lt;script src="js/jquery.mosaicPhoto.js"&gt;&lt;/script&gt;
-&lt;link rel="stylesheet" href="css/mosaicPhoto.css"&gt;
-          </code>
-        </pre>
+&lt;link rel="stylesheet" href="css/mosaicPhoto.css"&gt;</code></pre>
       </li>
-      <li>create the object with arrays of images like this:
-<pre>
-  <code>
-var images = {
+      <li><p>Create the object with arrays of images:</p>
+<pre><code>var images = {
 	'cat1' : [
 		["/img/cat1/1.jpg", "/img/cat1/big/1.jpg"],
 		 "/img/cat1/2.jpg",
@@ -90,43 +90,112 @@ var images = {
 		["/img/cat2/4.jpg", "http://site.com/feedback"],
 		["/img/cat2/5.jpg", "http://site.com/catalog"]
 	]
-	};</code>
-</pre>
-        You can have several categories of images and each image can have a link to the full image or to some other URL.
+	};</code></pre>
+        <p>You can have several categories of images and each image can have a link to the full image or to some other URL. You need at least one category for script to work.</p>
       </li>
-      <li>Create the container element
+      <li><p>Create the container element</p>
         <pre><code>&lt;div id="previewContainer" class="mosaicContainer"&gt;&lt;/div&gt;</code></pre>
       </li>
-      <li>Finally launch the mosaicPhoto script
-<pre>
-  <code>
-	jQuery(document).ready(function($){
-
-
-		$("#previewContainer").mosaicPhoto({
-			  images: images
-			, listeners: "#menu1"
-			, listenersEvents: 'click'
-		});
-
-	});</code>
-</pre>
+      <li><p>Finally launch the mosaicPhoto script</p>
+<pre><code>jQuery(document).ready(function($){
+  $("#previewContainer").mosaicPhoto({
+      images: images
+  });
+});</code></pre>
       </li>
     </ol>
 
+  <h3>Default settings</h3>
+  <p>You can pass object of settings when initializing or reinitializing mosaicPhoto.</p>
+  <p>Here are the defaults:</p>
+  <pre><code>mosaicPhoto.defaults = {
+  rows: 3, /* number of rows with images */
+  cols: 8, /* number of columns with images*/
+  ratio: 0.8, /* amount of filled spots. 0 - none, 1 - all spots are filled with images, but no more than of maxImages */
+  maxImages: 24, /* maximum this number of images will be shown. */
+  dynamic: true, /* if set to true, columns and rows are set dynamically depending on container element. overrides 'rows' and 'cols' settings */
+
+  activeClass: 'mosaicItem', /* CSS class for mosaic elements*/
+  fadeTime: 750, /* fading time, when refreshing container */
+  auto: false, /* enable auto refreshing */
+  timer: 3000, /* time for autorefreshing in milliseconds */
+
+  preload: true, /* preloading images is enabled */
+
+  images: {}, /* object with arrays of images. must contain at least 1 category. */
+
+  listeners: '', /* string representing listener objects container. i.e. "#menu a".
+    'listenersEvents' are delegated on those. Tags must contain 'rel' attribute with a value of correspoding images category.
+    (&lt;div id="menu"&gt; &lt;a href="#" rel="cat1"&gt;category 1&lt;/a&gt; &lt;a href="#" rel="cat2"&gt;category 2&lt;/a&gt;&lt;/div&gt;) */
+  listenersEvents: 'click', // event for listeners
+
+  showAllCallback: function () {
+  }, // executed after mosaic has been filled with images
+  listenerCallback: function () {
+  } // executed after listener has finished its event
+};</code></pre>
+
+  <p>All default settings are stored in mosaicPhoto.defaults object. You can change the default for all instances of mosaicPhoto by editing this object</p>
+  <pre><code>mosaicPhoto.defaults.preload = false; // disable preloading of images for all instances of mosaicPhoto</code></pre>
+
+  <h3>Methods</h3>
+  <p>After initializing mosaicPhoto on an element you can call these methods:</p>
+  <h4>getOptions([<em>string</em> optionName])</h4>
+  <p>If optionName is set, returns it's value, else returns object with all options.</p>
+  <pre><code>$("#previewContainer").mosaicPhoto().getOptions('maxImages');  // 24</code></pre>
+  <h4>setOptions(<em>object</em> options)</h4>
+  <p>Accepts object with new options. You need to use <em>refresh()</em> to see the effects of <em>setOptions</em></p>
+  <pre><code>$("#previewContainer").mosaicPhoto().setOptions({ ratio: .3, auto: true, timer: 5000 }).refresh();
+    // fills up to 30% of area with images and auto refreshes them every 5 seconds</code></pre>
+  <p>Trying to reinitialize already initialized objects also calls <em>setOptions</em>:</p>
+  <pre><code>$("#previewContainer").mosaicPhoto({ ratio: .3, auto: true, timer: 5000 }).refresh();
+    // does the same as code above</code></pre>
+  <h4>selectCategory(<em>string</em> categoryName)</h4>
+  <p>Images from <em>categoryName</em> will be shown on next refresh of mosaicPhoto. You need to use <em>refresh()</em> to see the effects of <em>selectCategory</em></p>
+  <pre><code>$("#previewContainer").mosaicPhoto().selectCategory('cat2').refresh(); // shows images from cat2</code></pre>
+  <h4>refresh()</h4>
+  <p>Refreshes mosaicPhoto container.</p>
+  <pre><code>$("#previewContainer").mosaicPhoto().refresh();</code></pre>
+  <h4>destroy()</h4>
+  <p>Destroys mosaicPhoto instance and all data</p>
+  <pre><code>$("#previewContainer").mosaicPhoto().destroy();</code></pre>
     <h3>Static container</h3>
 
     <div id="previewStaticContainer" class="mosaicContainer"></div>
     <div id="menu2" class="menu">
-      <p>
-        <small>Mosaic changes automatically</small><br>
-      </p>
       <p><button id="toggleAnim">Stop animation</button></p>
     </div>
+  <pre><code>var $cont2 =$("#previewStaticContainer");
+
+    // initialize mosaicPhoto
+    $cont2.mosaicPhoto({
+      images: images2,
+      dynamic: false,
+      cols: 19,
+      rows: 5,
+      maxImages: 20,
+      auto: true,
+      ratio: .05, // only 5% of area are filled with images
+      fadeTime: 200
+    });
 
 
-  </section>
 
+    //reinitilize with new fading time and new ratio
+    $cont2.mosaicPhoto({
+      ratio: .25, // 25% of area are filled with images now
+      fadeTime: 450,
+      timer: 1000
+    }).refresh();
+
+    // toggle animation with button element
+    $('#toggleAnim').click(function(e){
+      var curState = $cont2.mosaicPhoto().getOptions('auto'),
+      newState = !curState;
+      $(this).html(newState ? 'Stop animation' : 'Start animation');
+      $cont2.mosaicPhoto().setOptions({'auto':newState});
+      return e.preventDefault();
+    });</code></pre>
 </div>
 <!--[if !IE]>
 <script>fixScale(document);</script><!--<![endif]-->
@@ -134,117 +203,117 @@ var images = {
 <script>
   images = {
     weddings: [
-      ["http://h8every1.ru/mp/img/weddings/1.jpg", "http://h8every1.ru/mp/img/weddings/1.jpg"],
-      "http://h8every1.ru/mp/img/weddings/2.jpg",
-      "http://h8every1.ru/mp/img/weddings/3.jpg",
-      ["http://h8every1.ru/mp/img/weddings/4.jpg", "http://h8every1.ru/mp/img/weddings/4.jpg"],
-      "http://h8every1.ru/mp/img/weddings/5.jpg",
-      "http://h8every1.ru/mp/img/weddings/6.jpg",
-      "http://h8every1.ru/mp/img/weddings/7.jpg",
-      ["http://h8every1.ru/mp/img/weddings/8.jpg", "http://h8every1.ru/mp/img/weddings/8.jpg"],
-      "http://h8every1.ru/mp/img/weddings/9.jpg",
-      "http://h8every1.ru/mp/img/weddings/10.jpg",
-      "http://h8every1.ru/mp/img/weddings/11.jpg",
-      "http://h8every1.ru/mp/img/weddings/12.jpg",
-      "http://h8every1.ru/mp/img/weddings/13.jpg",
-      ["http://h8every1.ru/mp/img/weddings/14.jpg", "http://h8every1.ru/mp/img/weddings/14.jpg"],
-      "http://h8every1.ru/mp/img/weddings/15.jpg",
-      "http://h8every1.ru/mp/img/weddings/16.jpg",
-      "http://h8every1.ru/mp/img/weddings/17.jpg",
-      "http://h8every1.ru/mp/img/weddings/18.jpg",
-      ["http://h8every1.ru/mp/img/weddings/19.jpg", "http://h8every1.ru/mp/img/weddings/19.jpg"],
-      "http://h8every1.ru/mp/img/weddings/20.jpg",
-      "http://h8every1.ru/mp/img/weddings/21.jpg",
-      "http://h8every1.ru/mp/img/weddings/22.jpg",
-      "http://h8every1.ru/mp/img/weddings/23.jpg",
-      "http://h8every1.ru/mp/img/weddings/24.jpg",
-      "http://h8every1.ru/mp/img/weddings/25.jpg",
-      "http://h8every1.ru/mp/img/weddings/26.jpg",
-      "http://h8every1.ru/mp/img/weddings/27.jpg",
-      "http://h8every1.ru/mp/img/weddings/28.jpg",
-      "http://h8every1.ru/mp/img/weddings/29.jpg",
-      "http://h8every1.ru/mp/img/weddings/30.jpg"
+      ["http://h8every1.github.com/mosaicPhoto/images/weddings/1.jpg", "http://h8every1.github.com/mosaicPhoto/images/weddings/1.jpg"],
+      "http://h8every1.github.com/mosaicPhoto/images/weddings/2.jpg",
+      "http://h8every1.github.com/mosaicPhoto/images/weddings/3.jpg",
+      ["http://h8every1.github.com/mosaicPhoto/images/weddings/4.jpg", "http://h8every1.github.com/mosaicPhoto/images/weddings/4.jpg"],
+      "http://h8every1.github.com/mosaicPhoto/images/weddings/5.jpg",
+      "http://h8every1.github.com/mosaicPhoto/images/weddings/6.jpg",
+      "http://h8every1.github.com/mosaicPhoto/images/weddings/7.jpg",
+      ["http://h8every1.github.com/mosaicPhoto/images/weddings/8.jpg", "http://h8every1.github.com/mosaicPhoto/images/weddings/8.jpg"],
+      "http://h8every1.github.com/mosaicPhoto/images/weddings/9.jpg",
+      "http://h8every1.github.com/mosaicPhoto/images/weddings/10.jpg",
+      "http://h8every1.github.com/mosaicPhoto/images/weddings/11.jpg",
+      "http://h8every1.github.com/mosaicPhoto/images/weddings/12.jpg",
+      "http://h8every1.github.com/mosaicPhoto/images/weddings/13.jpg",
+      ["http://h8every1.github.com/mosaicPhoto/images/weddings/14.jpg", "http://h8every1.github.com/mosaicPhoto/images/weddings/14.jpg"],
+      "http://h8every1.github.com/mosaicPhoto/images/weddings/15.jpg",
+      "http://h8every1.github.com/mosaicPhoto/images/weddings/16.jpg",
+      "http://h8every1.github.com/mosaicPhoto/images/weddings/17.jpg",
+      "http://h8every1.github.com/mosaicPhoto/images/weddings/18.jpg",
+      ["http://h8every1.github.com/mosaicPhoto/images/weddings/19.jpg", "http://h8every1.github.com/mosaicPhoto/images/weddings/19.jpg"],
+      "http://h8every1.github.com/mosaicPhoto/images/weddings/20.jpg",
+      "http://h8every1.github.com/mosaicPhoto/images/weddings/21.jpg",
+      "http://h8every1.github.com/mosaicPhoto/images/weddings/22.jpg",
+      "http://h8every1.github.com/mosaicPhoto/images/weddings/23.jpg",
+      "http://h8every1.github.com/mosaicPhoto/images/weddings/24.jpg",
+      "http://h8every1.github.com/mosaicPhoto/images/weddings/25.jpg",
+      "http://h8every1.github.com/mosaicPhoto/images/weddings/26.jpg",
+      "http://h8every1.github.com/mosaicPhoto/images/weddings/27.jpg",
+      "http://h8every1.github.com/mosaicPhoto/images/weddings/28.jpg",
+      "http://h8every1.github.com/mosaicPhoto/images/weddings/29.jpg",
+      "http://h8every1.github.com/mosaicPhoto/images/weddings/30.jpg"
     ],
     'portrait': [
-      "http://h8every1.ru/mp/img/portrait/1.jpg",
-      "http://h8every1.ru/mp/img/portrait/2.jpg",
-      "http://h8every1.ru/mp/img/portrait/3.jpg",
-      "http://h8every1.ru/mp/img/portrait/4.jpg",
-      "http://h8every1.ru/mp/img/portrait/5.jpg",
-      "http://h8every1.ru/mp/img/portrait/6.jpg",
-      "http://h8every1.ru/mp/img/portrait/7.jpg",
-      "http://h8every1.ru/mp/img/portrait/8.jpg",
-      "http://h8every1.ru/mp/img/portrait/9.jpg",
-      "http://h8every1.ru/mp/img/portrait/10.jpg",
-      "http://h8every1.ru/mp/img/portrait/11.jpg",
-      "http://h8every1.ru/mp/img/portrait/12.jpg",
-      "http://h8every1.ru/mp/img/portrait/13.jpg",
-      "http://h8every1.ru/mp/img/portrait/14.jpg",
-      "http://h8every1.ru/mp/img/portrait/15.jpg",
-      "http://h8every1.ru/mp/img/portrait/16.jpg",
-      "http://h8every1.ru/mp/img/portrait/17.jpg",
-      "http://h8every1.ru/mp/img/portrait/18.jpg",
-      "http://h8every1.ru/mp/img/portrait/19.jpg",
-      "http://h8every1.ru/mp/img/portrait/20.jpg",
-      "http://h8every1.ru/mp/img/portrait/21.jpg",
-      "http://h8every1.ru/mp/img/portrait/22.jpg",
-      "http://h8every1.ru/mp/img/portrait/23.jpg",
-      "http://h8every1.ru/mp/img/portrait/24.jpg",
-      "http://h8every1.ru/mp/img/portrait/25.jpg",
-      "http://h8every1.ru/mp/img/portrait/26.jpg",
-      "http://h8every1.ru/mp/img/portrait/27.jpg"
+      "http://h8every1.github.com/mosaicPhoto/images/portrait/1.jpg",
+      "http://h8every1.github.com/mosaicPhoto/images/portrait/2.jpg",
+      "http://h8every1.github.com/mosaicPhoto/images/portrait/3.jpg",
+      "http://h8every1.github.com/mosaicPhoto/images/portrait/4.jpg",
+      "http://h8every1.github.com/mosaicPhoto/images/portrait/5.jpg",
+      "http://h8every1.github.com/mosaicPhoto/images/portrait/6.jpg",
+      "http://h8every1.github.com/mosaicPhoto/images/portrait/7.jpg",
+      "http://h8every1.github.com/mosaicPhoto/images/portrait/8.jpg",
+      "http://h8every1.github.com/mosaicPhoto/images/portrait/9.jpg",
+      "http://h8every1.github.com/mosaicPhoto/images/portrait/10.jpg",
+      "http://h8every1.github.com/mosaicPhoto/images/portrait/11.jpg",
+      "http://h8every1.github.com/mosaicPhoto/images/portrait/12.jpg",
+      "http://h8every1.github.com/mosaicPhoto/images/portrait/13.jpg",
+      "http://h8every1.github.com/mosaicPhoto/images/portrait/14.jpg",
+      "http://h8every1.github.com/mosaicPhoto/images/portrait/15.jpg",
+      "http://h8every1.github.com/mosaicPhoto/images/portrait/16.jpg",
+      "http://h8every1.github.com/mosaicPhoto/images/portrait/17.jpg",
+      "http://h8every1.github.com/mosaicPhoto/images/portrait/18.jpg",
+      "http://h8every1.github.com/mosaicPhoto/images/portrait/19.jpg",
+      "http://h8every1.github.com/mosaicPhoto/images/portrait/20.jpg",
+      "http://h8every1.github.com/mosaicPhoto/images/portrait/21.jpg",
+      "http://h8every1.github.com/mosaicPhoto/images/portrait/22.jpg",
+      "http://h8every1.github.com/mosaicPhoto/images/portrait/23.jpg",
+      "http://h8every1.github.com/mosaicPhoto/images/portrait/24.jpg",
+      "http://h8every1.github.com/mosaicPhoto/images/portrait/25.jpg",
+      "http://h8every1.github.com/mosaicPhoto/images/portrait/26.jpg",
+      "http://h8every1.github.com/mosaicPhoto/images/portrait/27.jpg"
     ],
     'secretcat':[
-      "http://h8every1.ru/mp/img/weddings/31.jpg",
-      "http://h8every1.ru/mp/img/weddings/32.jpg",
-      ["http://h8every1.ru/mp/img/weddings/33.jpg", "http://h8every1.ru/mp/img/weddings/33.jpg"],
-      "http://h8every1.ru/mp/img/weddings/34.jpg",
-      "http://h8every1.ru/mp/img/weddings/35.jpg",
-      "http://h8every1.ru/mp/img/weddings/36.jpg",
-      "http://h8every1.ru/mp/img/weddings/37.jpg",
-      "http://h8every1.ru/mp/img/weddings/38.jpg",
-      "http://h8every1.ru/mp/img/weddings/39.jpg",
-      "http://h8every1.ru/mp/img/weddings/40.jpg",
-      "http://h8every1.ru/mp/img/weddings/41.jpg",
-      "http://h8every1.ru/mp/img/weddings/42.jpg",
-      "http://h8every1.ru/mp/img/weddings/40.jpg",
-      "http://h8every1.ru/mp/img/weddings/43.jpg",
-      ["http://h8every1.ru/mp/img/weddings/44.jpg", "http://h8every1.ru/mp/img/weddings/44.jpg"],
-      "http://h8every1.ru/mp/img/weddings/45.jpg",
-      "http://h8every1.ru/mp/img/weddings/46.jpg",
-      "http://h8every1.ru/mp/img/weddings/47.jpg",
-      "http://h8every1.ru/mp/img/weddings/48.jpg",
-      "http://h8every1.ru/mp/img/weddings/49.jpg",
-      ["http://h8every1.ru/mp/img/weddings/50.jpg", "http://h8every1.ru/mp/img/weddings/50.jpg"]
+      "http://h8every1.github.com/mosaicPhoto/images/weddings/31.jpg",
+      "http://h8every1.github.com/mosaicPhoto/images/weddings/32.jpg",
+      ["http://h8every1.github.com/mosaicPhoto/images/weddings/33.jpg", "http://h8every1.github.com/mosaicPhoto/images/weddings/33.jpg"],
+      "http://h8every1.github.com/mosaicPhoto/images/weddings/34.jpg",
+      "http://h8every1.github.com/mosaicPhoto/images/weddings/35.jpg",
+      "http://h8every1.github.com/mosaicPhoto/images/weddings/36.jpg",
+      "http://h8every1.github.com/mosaicPhoto/images/weddings/37.jpg",
+      "http://h8every1.github.com/mosaicPhoto/images/weddings/38.jpg",
+      "http://h8every1.github.com/mosaicPhoto/images/weddings/39.jpg",
+      "http://h8every1.github.com/mosaicPhoto/images/weddings/40.jpg",
+      "http://h8every1.github.com/mosaicPhoto/images/weddings/41.jpg",
+      "http://h8every1.github.com/mosaicPhoto/images/weddings/42.jpg",
+      "http://h8every1.github.com/mosaicPhoto/images/weddings/40.jpg",
+      "http://h8every1.github.com/mosaicPhoto/images/weddings/43.jpg",
+      ["http://h8every1.github.com/mosaicPhoto/images/weddings/44.jpg", "http://h8every1.github.com/mosaicPhoto/images/weddings/44.jpg"],
+      "http://h8every1.github.com/mosaicPhoto/images/weddings/45.jpg",
+      "http://h8every1.github.com/mosaicPhoto/images/weddings/46.jpg",
+      "http://h8every1.github.com/mosaicPhoto/images/weddings/47.jpg",
+      "http://h8every1.github.com/mosaicPhoto/images/weddings/48.jpg",
+      "http://h8every1.github.com/mosaicPhoto/images/weddings/49.jpg",
+      ["http://h8every1.github.com/mosaicPhoto/images/weddings/50.jpg", "http://h8every1.github.com/mosaicPhoto/images/weddings/50.jpg"]
     ]
   };
   images2 = {
     studio: [
-      "http://h8every1.ru/mp/img/studio/1.jpg",
-      "http://h8every1.ru/mp/img/studio/2.jpg",
-      "http://h8every1.ru/mp/img/studio/3.jpg",
-      "http://h8every1.ru/mp/img/studio/4.jpg",
-      "http://h8every1.ru/mp/img/studio/5.jpg",
-      "http://h8every1.ru/mp/img/studio/6.jpg",
-      "http://h8every1.ru/mp/img/studio/7.jpg",
-      "http://h8every1.ru/mp/img/studio/8.jpg",
-      "http://h8every1.ru/mp/img/studio/9.jpg",
-      "http://h8every1.ru/mp/img/studio/10.jpg",
-      "http://h8every1.ru/mp/img/studio/11.jpg",
-      "http://h8every1.ru/mp/img/studio/12.jpg",
-      "http://h8every1.ru/mp/img/studio/13.jpg",
-      "http://h8every1.ru/mp/img/studio/14.jpg",
-      "http://h8every1.ru/mp/img/studio/15.jpg",
-      "http://h8every1.ru/mp/img/studio/16.jpg",
-      "http://h8every1.ru/mp/img/studio/17.jpg",
-      "http://h8every1.ru/mp/img/studio/18.jpg",
-      "http://h8every1.ru/mp/img/studio/19.jpg",
-      "http://h8every1.ru/mp/img/studio/20.jpg",
-      "http://h8every1.ru/mp/img/studio/21.jpg",
-      "http://h8every1.ru/mp/img/studio/22.jpg",
-      "http://h8every1.ru/mp/img/studio/23.jpg",
-      "http://h8every1.ru/mp/img/studio/24.jpg",
-      "http://h8every1.ru/mp/img/studio/25.jpg"
+      "http://h8every1.github.com/mosaicPhoto/images/studio/1.jpg",
+      "http://h8every1.github.com/mosaicPhoto/images/studio/2.jpg",
+      "http://h8every1.github.com/mosaicPhoto/images/studio/3.jpg",
+      "http://h8every1.github.com/mosaicPhoto/images/studio/4.jpg",
+      "http://h8every1.github.com/mosaicPhoto/images/studio/5.jpg",
+      "http://h8every1.github.com/mosaicPhoto/images/studio/6.jpg",
+      "http://h8every1.github.com/mosaicPhoto/images/studio/7.jpg",
+      "http://h8every1.github.com/mosaicPhoto/images/studio/8.jpg",
+      "http://h8every1.github.com/mosaicPhoto/images/studio/9.jpg",
+      "http://h8every1.github.com/mosaicPhoto/images/studio/10.jpg",
+      "http://h8every1.github.com/mosaicPhoto/images/studio/11.jpg",
+      "http://h8every1.github.com/mosaicPhoto/images/studio/12.jpg",
+      "http://h8every1.github.com/mosaicPhoto/images/studio/13.jpg",
+      "http://h8every1.github.com/mosaicPhoto/images/studio/14.jpg",
+      "http://h8every1.github.com/mosaicPhoto/images/studio/15.jpg",
+      "http://h8every1.github.com/mosaicPhoto/images/studio/16.jpg",
+      "http://h8every1.github.com/mosaicPhoto/images/studio/17.jpg",
+      "http://h8every1.github.com/mosaicPhoto/images/studio/18.jpg",
+      "http://h8every1.github.com/mosaicPhoto/images/studio/19.jpg",
+      "http://h8every1.github.com/mosaicPhoto/images/studio/20.jpg",
+      "http://h8every1.github.com/mosaicPhoto/images/studio/21.jpg",
+      "http://h8every1.github.com/mosaicPhoto/images/studio/22.jpg",
+      "http://h8every1.github.com/mosaicPhoto/images/studio/23.jpg",
+      "http://h8every1.github.com/mosaicPhoto/images/studio/24.jpg",
+      "http://h8every1.github.com/mosaicPhoto/images/studio/25.jpg"
     ]
   };
 </script>
@@ -254,19 +323,18 @@ var images = {
     var $cont1 = $("#previewContainer"),
         $cont2 =$("#previewStaticContainer");
     $cont1.mosaicPhoto({
-      images: images, listeners: "#menu1 a", ratio: 30
+      images: images, listeners: "#menu1 a", ratio: .3
     });
 
     $cont2.mosaicPhoto({
-      images: images2, dynamic: false, cols: 19, rows: 5, maxImages: 20, auto: true, ratio: 5, fadeTime: 200, imgWidth: 30
+      images: images2, dynamic: false, cols: 19, rows: 5, maxImages: 20, auto: true, ratio: .05, fadeTime: 200
     });
 
     $cont2.mosaicPhoto({
-      ratio: 25, fadeTime: 450, timer: 1000
+      ratio: .25, fadeTime: 450, timer: 1000
     }).refresh();
 
-    //        console.log($("#previewStaticContainer").mosaicPhoto().getOptions());
-    $('#toggleAnim').click(function(e){
+     $('#toggleAnim').click(function(e){
       var curState = $cont2.mosaicPhoto().getOptions('auto'),
           newState = !curState;
       $(this).html(newState ? 'Stop animation' : 'Start animation');

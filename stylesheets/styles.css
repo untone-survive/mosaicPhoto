@@ -853,13 +853,18 @@ section #title .credits.right {
   }
 }
 
+.menu {
+  text-align: center;
+  font-size: 18px;
+}
+
 
 .mosaicContainer {
   width: 80%;
-  height: 500px;
+  height: 320px;
   padding: 40px;
   z-index: 10;
-  margin: 0 auto;
+  margin: 0 auto 15px;
   background-color: #dedede;
 }
 
@@ -901,4 +906,8 @@ section #title .credits.right {
   -webkit-box-shadow: 3px 3px 10px 0px #333333;
   -moz-box-shadow: 3px 3px 10px 0px #333333;
   box-shadow: 3px 3px 10px 0px #333333;
+}
+
+h4 {
+  font-weight: bold;
 }
