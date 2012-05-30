@@ -126,7 +126,7 @@
                   link = isObject && img[1] ? '<a href="' + img[1] + '"></a>' : '';
 
               // generate image
-              imgString += '<div class="' + settings.activeClass + '" ' + 'style="top:' + ( i * imgHeight) + 'px;' + 'left:' + ( j * imgWidth) + 'px;' + 'background-image:url(' + src + ')">' + link + '</div>';
+              imgString += '<div class="' + settings.activeClass + '" ' + 'style="top:' + ( i * imgHeight) + 'px;' + 'left:' + ( j * imgWidth) + 'px;' + 'background-image:url(' + src + ');width:'+imgWidth+'px;height:'+imgHeight+'px;">' + link + '</div>';
 
               // select next image and div for iserting
               div = divs.shift();
