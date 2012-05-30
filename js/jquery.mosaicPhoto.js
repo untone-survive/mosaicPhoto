@@ -19,9 +19,10 @@
     // object of images
         images = settings.images, // number of images to show
         maxImages, // selected images category
-        imgCat, // image dimensions
-        imgWidth = 0, imgHeight = 0, // timer id for automatic transitions
-        timerId, listeners, // namespace for binding events
+        imgCat,
+        imgWidth = settings.imgWidth, imgHeight = settings.imgHeight, // image dimensions
+        timerId, // timer id for automatic transitions
+        listeners, // namespace for binding events
         namespace = '.mosaicphoto' + (new Date).getTime();
 
     function Initialize() {
@@ -33,8 +34,6 @@
     function checkOptions() {
       // repair user input
       _repairRatio();
-      // calculate image div dimensions
-      _checkDimensions();
       // set new columns and rows number
       _newColsRows();
       // set maximum of images
@@ -89,15 +88,6 @@
         return true;
       }
       return false;
-    }
-
-    // calculates image dimensions
-    function _checkDimensions() {
-      // calculating single item dimensions from css
-      var proto = $('<div class="' + settings.activeClass + '"/>').appendTo(container);
-      imgWidth = proto.outerWidth(true);
-      imgHeight = proto.outerHeight(true);
-      proto = null;
     }
 
     // generates and inserts images into container
@@ -262,6 +252,9 @@
     ratio: 0.8, /* amount of filled spots. 0 - none, 1 - all spots are filled with images. With maximum of maxImages */
     maxImages: 24, /* maximum this number of images will be shown. overrides ratio setting */
     dynamic: true, /* if set to true, columns and rows are set dynamically. overrides 'rows' and 'cols' settings */
+
+    imgWidth: 60, /* can't rely on CSS styling, files may not be downloaded by the time of ready() event */
+    imgHeight: 60,
 
     activeClass: 'mosaicItem', /* class for mosaic div elements*/
     fadeTime: 750, /* fading time */
