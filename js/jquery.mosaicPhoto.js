@@ -3,8 +3,8 @@
  * Use: insert preview photos mosaically into div
  * Author: Anton Syuvaev (http://h8every1.ru)
  * Company: Elustro (http://elustro.ru)
- * Date: 10.05.2012
- * Version: 1.0.2
+ * Date: 31.05.2012
+ * Version: 1.1.0
  */
 
 (function ($) {
