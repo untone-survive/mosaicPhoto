@@ -879,9 +879,9 @@ section #title .credits.right {
   height: 60px;
   background-position: center;
 
-  -webkit-box-shadow: 3px 3px 20px 0px #333333;
-  -moz-box-shadow: 3px 3px 20px 0px #333333;
-  box-shadow: 3px 3px 20px 0px #333333;
+  -webkit-box-shadow: 3px 3px 20px -5px #555;
+  -moz-box-shadow: 3px 3px 20px -5px #555;
+  box-shadow: 3px 3px 20px -5px #555;
 }
 
 .mosaicItem  a {
@@ -903,9 +903,6 @@ section #title .credits.right {
 
 #previewStaticContainer .mosaicItem {
   width: 30px;
-  -webkit-box-shadow: 3px 3px 10px 0px #333333;
-  -moz-box-shadow: 3px 3px 10px 0px #333333;
-  box-shadow: 3px 3px 10px 0px #333333;
 }
 
 h4 {
